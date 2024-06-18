@@ -39,7 +39,9 @@ const Form = () => {
       })
         .then((res) => res.json())
         .then((res: any) => {
-          router.push(`/firstFrame?id=${res.id}`);
+          router.push(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/firstFrame?id=${res.id}`
+          );
         });
     } catch (e) {
       console.log("whats the error??", e);
