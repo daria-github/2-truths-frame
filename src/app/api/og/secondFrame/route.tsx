@@ -58,16 +58,29 @@ export async function GET(request: Request) {
 
     return new ImageResponse(
       (
-        <div tw="flex flex-col w-full py-12 px-4 md:items-left justify-between p-8 bg-black min-h-screen">
-          <h1 tw="mt-4 mb-6 text-center text-4xl font-bold leading-9 text-white">
-            {`${name} has told Two Truths and a Lie!`}
-          </h1>
-          <h2 tw="flex flex-col text-3xl sm:text-3xl font-bold tracking-tight text-white text-left">
+        <div tw="flex flex-col w-full py-12 px-4 md:items-left justify-between p-8 bg-black min-h-screen divide-y font-playfair">
+          <div tw="flex flex-row flex-auto">
+            <h1
+              style={{ fontWeight: "bold" }}
+              tw="mt-4 mb-6 text-4xl text-white font-playfair grow"
+            >
+              {`${name} has told Two Truths and a Lie!`}
+            </h1>
+            <img
+              tw="h-40"
+              src="https://github.com/daria-github/2-truths-frame/blob/46b2b6f01033528cdf55b3000444756b762d5139/public/eyeGraphic.png?raw=true"
+            />
+          </div>
+          <h2 tw="flex flex-col text-4xl sm:text-3xl font-bold tracking-tight text-white text-left">
             Poll results
           </h2>
-          <h3 tw="text-2xl font-semibold text-white">{`${firstItemVotes} votes`}</h3>
-          <h3 tw="text-2xl font-semibold text-white">{`${secondItemVotes} votes`}</h3>
-          <h3 tw="text-2xl font-semibold text-white">{`${thirdItemVotes} votes`}</h3>
+          <h3 tw="text-3xl font-semibold text-white border-b-2 border-white font-playfair">{`${firstItemVotes} votes`}</h3>
+          <h3 tw="text-3xl font-semibold text-white border-b-2 border-white font-playfair">
+            {`${secondItemVotes} votes`}
+          </h3>
+          <h3 tw="text-3xl font-semibold text-white border-b-2 border-white font-playfair">
+            {`${thirdItemVotes} votes`}
+          </h3>
         </div>
       )
     );
