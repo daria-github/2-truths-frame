@@ -45,7 +45,7 @@ const Form = () => {
         <label for="email" class="block text-sm font-medium leading-6 text-white">Your Name</label>
         <div className="mt-1">
           <input
-            className="block w-full rounded-md border-0 bg-white/5 py-2 px-4 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
             type="text"
             name="title"
             value={currentTitle}
@@ -58,7 +58,7 @@ const Form = () => {
         <label for="email" class="block text-sm font-medium leading-6 text-white">First Truth</label>
         <div className="mt-1">
           <input
-            className="block w-full rounded-md border-0 bg-white/5 py-2 px-4 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
             type="text"
             name="truth1"
             value={currentTruth1}
@@ -71,7 +71,7 @@ const Form = () => {
         <label for="email" class="block text-sm font-medium leading-6 text-white">Second Truth</label>
         <div className="mt-1">
           <input
-            className="block w-full rounded-md border-0 bg-white/5 py-2 px-4 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
             type="text"
             name="truth2"
             value={currentTruth2}
@@ -84,7 +84,7 @@ const Form = () => {
         <label for="email" class="block text-sm font-medium leading-6 text-white">The Lie</label>
         <div className="mt-1">
           <input
-            className="block w-full rounded-md border-0 bg-white/5 py-2 px-4 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
             type="text"
             name="lie"
             value={currentLie}
