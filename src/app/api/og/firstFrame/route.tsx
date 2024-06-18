@@ -28,7 +28,7 @@ export async function GET(request: Request) {
             Which of these is a lie?
           </h2>
           {list.map((item, index) => (
-            <h2 tw="text-2xl font-semibold text-white" key={index}>{item}</h2>
+            <h2 tw="text-2xl font-semibold text-white" key={index}>{index+1}: {item}</h2>
           ))}
         </div>
       )
