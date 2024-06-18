@@ -9,11 +9,11 @@ export let metadata = {
 
 const SecondFrame = (props) => {
   const vote = Number(props.searchParams.vote);
-  const data = props.searchParams.data;
+  const id = props.searchParams.id;
   const parsedData = JSON.parse(decodeURI(data));
 
-  const dataDirectory = path.join(process.cwd(), "data");
-  const filePath = path.join(dataDirectory, `votes-${parsedData.name}.json`);
+  const dataDirectory = path.join(process.cwd(), "data", id);
+  const votesFilePath = path.join(process.cwd(), "data", id, "votes.txt");
 
   // Ensure the data directory exists
   if (!fs.existsSync(dataDirectory)) {

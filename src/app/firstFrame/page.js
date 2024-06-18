@@ -6,7 +6,7 @@ export let metadata = {
 };
 
 const FirstFrame = (props) => {
-  const data = props.searchParams.data;
+  const id = props.searchParams.id;
   const frameMetadata = getFrameMetadata({
     accepts: { xmtp: "2024-02-09" },
     isOpenFrame: true,
@@ -14,20 +14,20 @@ const FirstFrame = (props) => {
       {
         label: "1",
         action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=1&data=${data}`,
+        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=1&id=${id}`,
       },
       {
         label: "2",
         action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=2&data=${data}`,
+        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=2&id=${id}`,
       },
       {
         label: "3",
         action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=3&data=${data}`,
+        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=3&id=${id}`,
       },
     ],
-    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/firstFrame?data=${data}`,
+    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/firstFrame?id=${id}`,
   });
 
   metadata = {
@@ -50,13 +50,13 @@ const FirstFrame = (props) => {
         </h1>
         <button
           type="button"
-          class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+          className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="size-6 mr-2"
           >
