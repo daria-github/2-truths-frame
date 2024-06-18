@@ -14,17 +14,17 @@ const FirstFrame = (props) => {
       {
         label: "1",
         action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=1&data=${data}`,
+        target: `1: ${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=1&data=${data}`,
       },
       {
         label: "2",
         action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=2&data=${data}`,
+        target: `2: ${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=2&data=${data}`,
       },
       {
         label: "3",
         action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=3&data=${data}`,
+        target: `3: ${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=3&data=${data}`,
       },
     ],
     image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/firstFrame?data=${data}`,
