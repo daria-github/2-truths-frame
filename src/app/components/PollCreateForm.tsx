@@ -30,7 +30,7 @@ const Form = () => {
     };
 
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/saveData`, {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/saveData`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
