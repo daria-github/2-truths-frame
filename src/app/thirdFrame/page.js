@@ -25,7 +25,7 @@ const ThirdFrame = (props) => {
   const frameMetadata = getFrameMetadata({
     accepts: { xmtp: "2024-02-09" },
     isOpenFrame: true,
-    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/ThirdFrame?data=${data}`,
+    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/thirdFrame?data=${data}`,
   });
 
   metadata = {
