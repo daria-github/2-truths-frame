@@ -1,20 +1,10 @@
-import { getFrameHtmlResponse } from "@coinbase/onchainkit/frame";
-import { getXmtpFrameMessage } from "@coinbase/onchainkit/xmtp";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { v4 } from "uuid";
 import fs from "fs";
+import { getDisplayOrder } from "./displayOrder";
 
-export const getDisplayOrder = () => {
-  const arrayOptions = ["truth1", "truth2", "lie"];
-  for (let i = arrayOptions.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arrayOptions[i], arrayOptions[j]] = [arrayOptions[j], arrayOptions[i]];
-  }
-  return arrayOptions;
-};
-
-async function getResponse(req: NextRequest): Promise<string> {
+async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body = await req.json();
   const uuid = v4();
 
@@ -40,8 +30,8 @@ async function getResponse(req: NextRequest): Promise<string> {
   const displayOrder = JSON.stringify(getDisplayOrder());
   fs.appendFileSync(displayOrderPath, displayOrder);
 
-  return uuid;
+  return NextResponse.json({ id: uuid });
 }
-export async function POST(req: NextRequest): Promise<string> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   return getResponse(req);
 }

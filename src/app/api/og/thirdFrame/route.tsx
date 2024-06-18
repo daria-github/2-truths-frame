@@ -1,13 +1,18 @@
 import { ImageResponse } from "next/og";
+import path from "path";
+import fs from "fs";
 
 // DARICK: This is the third frame image with the results
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const data = searchParams.get("data") || "";
-    const parsedData = JSON.parse(decodeURI(data));
+    const id = searchParams.get("id") || "";
 
-    const { truth1, truth2, lie, name } = parsedData;
+    const nameFilePath = path.join(process.cwd(), "data", id, "name.txt");
+    const lieFilePath = path.join(process.cwd(), "data", id, "lie.txt");
+
+    const name = fs.readFileSync(nameFilePath, "utf8");
+    const lie = fs.readFileSync(lieFilePath, "utf8");
 
     return new ImageResponse(
       (

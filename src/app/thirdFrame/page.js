@@ -8,9 +8,7 @@ export let metadata = {
 };
 
 const ThirdFrame = (props) => {
-  const vote = Number(props.searchParams.vote);
-  const data = props.searchParams.data;
-  const parsedData = JSON.parse(decodeURI(data));
+  const id = props.searchParams.id;
 
   const dataDirectory = path.join(process.cwd(), "data");
   // const filePath = path.join(dataDirectory, `votes-${parsedData.name}.json`);
@@ -20,12 +18,10 @@ const ThirdFrame = (props) => {
     fs.mkdirSync(dataDirectory);
   }
 
-  // fs.appendFileSync(filePath, `${vote}`);
-
   const frameMetadata = getFrameMetadata({
     accepts: { xmtp: "2024-02-09" },
     isOpenFrame: true,
-    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/thirdFrame?data=${data}`,
+    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/thirdFrame?id=${id}`,
   });
 
   metadata = {

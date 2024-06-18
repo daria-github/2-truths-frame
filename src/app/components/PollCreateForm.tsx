@@ -30,22 +30,20 @@ const Form = () => {
     };
 
     try {
-      const uuid = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/saveData`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newFormData),
-        }
-      );
-      console.log("UUID!!!", uuid);
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/saveData`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newFormData),
+      })
+        .then((res) => res.json())
+        .then((res: any) => {
+          router.push(`/firstFrame?id=${res.id}`);
+        });
     } catch (e) {
       console.log("whats the error??", e);
     }
-
-    router.push(`/firstFrame?data=${encodeURI(JSON.stringify(newFormData))}`);
   };
 
   return (
