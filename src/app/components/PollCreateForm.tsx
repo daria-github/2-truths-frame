@@ -1,6 +1,9 @@
 "use client";
+// import fs from "fs";
+// import path from "path";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { v4 } from "uuid";
 
 const Form = () => {
   const [currentTitle, setCurrentTitle] = useState("");
@@ -17,7 +20,7 @@ const Form = () => {
     if (name === "lie") setCurrentLie(value);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const newFormData = {
       name: currentTitle,
@@ -25,6 +28,22 @@ const Form = () => {
       truth2: currentTruth2,
       lie: currentLie,
     };
+
+    try {
+      const uuid = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/saveData`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newFormData),
+        }
+      );
+      console.log("UUID!!!", uuid);
+    } catch (e) {
+      console.log("whats the error??", e);
+    }
 
     router.push(`/firstFrame?data=${encodeURI(JSON.stringify(newFormData))}`);
   };
@@ -42,7 +61,12 @@ const Form = () => {
       }}
     >
       <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-white">Your Name</label>
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium leading-6 text-white"
+        >
+          Your Name
+        </label>
         <div className="mt-1">
           <input
             className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
@@ -55,7 +79,12 @@ const Form = () => {
         </div>
       </div>
       <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-white">First Truth</label>
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium leading-6 text-white"
+        >
+          First Truth
+        </label>
         <div className="mt-1">
           <input
             className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
@@ -68,7 +97,12 @@ const Form = () => {
         </div>
       </div>
       <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-white">Second Truth</label>
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium leading-6 text-white"
+        >
+          Second Truth
+        </label>
         <div className="mt-1">
           <input
             className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
@@ -81,7 +115,12 @@ const Form = () => {
         </div>
       </div>
       <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-white">The Lie</label>
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium leading-6 text-white"
+        >
+          The Lie
+        </label>
         <div className="mt-1">
           <input
             className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
@@ -93,7 +132,12 @@ const Form = () => {
           />
         </div>
       </div>
-      <button className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-3 mt-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" type="submit">Submit</button>
+      <button
+        className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-3 mt-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+        type="submit"
+      >
+        Submit
+      </button>
     </form>
   );
 };

@@ -1,13 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const shuffleArray = (array: any[]) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
-
 // DARICK: This is the first frame image with the options
 export async function GET(request: Request) {
   try {
@@ -18,7 +10,6 @@ export async function GET(request: Request) {
     const { name, truth1, truth2, lie } = parsedData;
 
     const list = [truth1, truth2, lie];
-    // const shuffledList = shuffleArray(list);
 
     return new ImageResponse(
       (
@@ -28,7 +19,9 @@ export async function GET(request: Request) {
             Which of these is a lie?
           </h2>
           {list.map((item, index) => (
-            <h2 tw="text-2xl font-semibold text-white" key={index}>{index+1}: {item}</h2>
+            <h2 tw="text-2xl font-semibold text-white" key={index}>
+              {index + 1}: {item}
+            </h2>
           ))}
         </div>
       )
