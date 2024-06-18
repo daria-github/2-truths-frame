@@ -63,7 +63,7 @@ const Form = () => {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium leading-6 text-white"
+          className="block text-xs font-medium leading-6 text-gray-300 font-playfair uppercase tracking-widest"
         >
           Your Name
         </label>
@@ -81,7 +81,7 @@ const Form = () => {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium leading-6 text-white"
+          className="block text-xs font-medium leading-6 text-gray-300 font-playfair uppercase tracking-widest"
         >
           First Truth
         </label>
@@ -99,7 +99,7 @@ const Form = () => {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium leading-6 text-white"
+          className="block text-xs font-medium leading-6 text-gray-300 font-playfair uppercase tracking-widest"
         >
           Second Truth
         </label>
@@ -117,7 +117,7 @@ const Form = () => {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium leading-6 text-white"
+          className="block text-xs font-medium leading-6 text-gray-300 font-playfair uppercase tracking-widest"
         >
           The Lie
         </label>
@@ -133,7 +133,7 @@ const Form = () => {
         </div>
       </div>
       <button
-        className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-3 mt-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+        className="flex w-full justify-center rounded-md bg-[#9B8768] px-3 py-3 mt-4 text-sm font-bold leading-6 uppercase tracking-widest font-playfair text-black shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
         type="submit"
       >
         Submit
