@@ -22,13 +22,13 @@ export async function GET(request: Request) {
 
     return new ImageResponse(
       (
-        <div tw="flex flex-col w-full py-12 px-4 md:items-center justify-between p-8">
-          <h1>{`Welcome to ${name}'s Two Truths and a Lie!`}</h1>
-          <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-left">
+        <div tw="flex flex-col w-full py-12 px-4 md:items-left justify-between p-8 bg-black min-h-screen">
+          <h1 tw="mt-4 mb-6 text-center text-4xl font-bold leading-9 text-white">{`${name} has told Two Truths and a Lie!`}</h1>
+          <h2 tw="flex flex-col text-3xl sm:text-3xl font-bold tracking-tight text-white text-left">
             Which of these is a lie?
           </h2>
           {list.map((item, index) => (
-            <h2 key={index}>{item}</h2>
+            <h2 tw="text-2xl font-semibold text-white" key={index}>{item}</h2>
           ))}
         </div>
       )
