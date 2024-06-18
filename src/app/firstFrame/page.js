@@ -47,7 +47,7 @@ const FirstFrame = (props) => {
           alt="XMTP Logo"
         />
         <h1 className="-mt-10 mb-6 text-center text-4xl font-semibold leading-10 text-white font-playfair">
-          You've created your
+          You&apos;ve created your
           <br />2 Truths and a Lie!
         </h1>
         <CopyButton />
