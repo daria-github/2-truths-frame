@@ -32,7 +32,6 @@ const Form = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-2"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -94,7 +93,7 @@ const Form = () => {
           />
         </div>
       </div>
-      <button className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" type="submit">Submit</button>
+      <button className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-3 mt-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" type="submit">Submit</button>
     </form>
   );
 };

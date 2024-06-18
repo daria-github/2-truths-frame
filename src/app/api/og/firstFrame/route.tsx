@@ -22,8 +22,8 @@ export async function GET(request: Request) {
 
     return new ImageResponse(
       (
-        <div tw="flex flex-col w-full py-12 px-4 md:items-center justify-between p-8">
-          <h1>{`Welcome to ${name}'s Two Truths and a Lie!`}</h1>
+        <div tw="flex flex-col w-full py-12 px-4 md:items-left justify-between p-8 bg-slate-800">
+          <h1 tw="mt-4 mb-6 text-center text-3xl font-bold leading-9 text-white">{`${name} has told Two Truths and a Lie!`}</h1>
           <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-left">
             Which of these is a lie?
           </h2>
