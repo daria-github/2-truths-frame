@@ -2,15 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { v4 } from "uuid";
 import fs from "fs";
-
-export const getDisplayOrder = () => {
-  const arrayOptions = ["truth1", "truth2", "lie"];
-  for (let i = arrayOptions.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arrayOptions[i], arrayOptions[j]] = [arrayOptions[j], arrayOptions[i]];
-  }
-  return arrayOptions;
-};
+import { getDisplayOrder } from "./displayOrder";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body = await req.json();
