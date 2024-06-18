@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 
     return new ImageResponse(
       (
-        <div tw="flex flex-col w-full py-12 px-4 md:items-left justify-between p-8 bg-black min-h-screen">
+        <div tw="flex flex-col w-full py-12 px-4 md:items-left justify-between p-8 bg-black min-h-screen divide-y">
           <h1 tw="mt-4 mb-6 text-center text-4xl font-bold leading-9 text-white">{`${name} has told Two Truths and a Lie!`}</h1>
           <h2 tw="flex flex-col text-3xl sm:text-3xl font-bold tracking-tight text-white text-left">
             Which of these is a lie?
