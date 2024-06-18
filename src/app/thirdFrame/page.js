@@ -7,32 +7,25 @@ export let metadata = {
   description: "Results",
 };
 
-const SecondFrame = (props) => {
+const ThirdFrame = (props) => {
   const vote = Number(props.searchParams.vote);
   const data = props.searchParams.data;
   const parsedData = JSON.parse(decodeURI(data));
 
   const dataDirectory = path.join(process.cwd(), "data");
-  const filePath = path.join(dataDirectory, `votes-${parsedData.name}.json`);
+  // const filePath = path.join(dataDirectory, `votes-${parsedData.name}.json`);
 
   // Ensure the data directory exists
   if (!fs.existsSync(dataDirectory)) {
     fs.mkdirSync(dataDirectory);
   }
 
-  fs.appendFileSync(filePath, `${vote}`);
+  // fs.appendFileSync(filePath, `${vote}`);
 
   const frameMetadata = getFrameMetadata({
     accepts: { xmtp: "2024-02-09" },
     isOpenFrame: true,
-    buttons: [
-      {
-        label: "See Correct Answer",
-        action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/thirdFrame?data=${data}`,
-      },
-    ],
-    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/secondFrame?data=${data}`,
+    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/ThirdFrame?data=${data}`,
   });
 
   metadata = {
@@ -49,4 +42,4 @@ const SecondFrame = (props) => {
   );
 };
 
-export default SecondFrame;
+export default ThirdFrame;
