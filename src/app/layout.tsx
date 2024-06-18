@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "2 Truths and a Lie",
@@ -16,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-slate-900 min-h-screen">{children}</body>
+      <body className="bg-slate-900 min-h-screen ${playfair.className}">{children}</body>
     </html>
   );
 }
