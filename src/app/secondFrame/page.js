@@ -11,6 +11,7 @@ const SecondFrame = (props) => {
   const vote = Number(props.searchParams.vote);
   const id = props.searchParams.id;
 
+  console.log("ID IN SECOND FRAME", id);
   const updateVals = async () => {
     console.log("gett in to update vals. should hit this after any vote");
     try {
