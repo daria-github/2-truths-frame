@@ -12,6 +12,7 @@ const SecondFrame = (props) => {
   const id = props.searchParams.id;
 
   const updateVals = async () => {
+    console.log("gett in to update vals. should hit this after any vote");
     try {
       noStore();
       const currentVals = await kv.hgetall(id);
@@ -25,6 +26,7 @@ const SecondFrame = (props) => {
         votedFor = displayOrder[2];
       }
 
+      console.log("voted for", votedFor);
       const fieldKey = `${votedFor}Votes`;
       const currentVotes = currentVals[fieldKey];
       const newVoteCount = currentVotes + 1;
