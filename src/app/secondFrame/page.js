@@ -28,6 +28,7 @@ const SecondFrame = (props) => {
     const currentVotes = parseInt(currentVals[fieldKey] || 0, 10);
     const newVoteCount = currentVotes + 1;
 
+    noStore();
     await kv.hset(id, {
       [fieldKey]: newVoteCount,
     });
