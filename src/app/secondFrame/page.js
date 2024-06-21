@@ -12,30 +12,34 @@ const SecondFrame = (props) => {
   const id = props.searchParams.id;
 
   const updateVals = async () => {
-    noStore();
-    const currentVals = await kv.hgetall(id);
-    const displayOrder = currentVals.displayOrder;
-    let votedFor;
-    if (vote === 1) {
-      votedFor = displayOrder[0];
-    } else if (vote === 2) {
-      votedFor = displayOrder[1];
-    } else if (vote === 3) {
-      votedFor = displayOrder[2];
+    try {
+      noStore();
+      const currentVals = await kv.hgetall(id);
+      const displayOrder = currentVals.displayOrder;
+      let votedFor;
+      if (vote === 1) {
+        votedFor = displayOrder[0];
+      } else if (vote === 2) {
+        votedFor = displayOrder[1];
+      } else if (vote === 3) {
+        votedFor = displayOrder[2];
+      }
+
+      const fieldKey = `${votedFor}Votes`;
+      const currentVotes = currentVals[fieldKey];
+      const newVoteCount = currentVotes + 1;
+
+      await kv.hset(id, {
+        [fieldKey]: newVoteCount,
+      });
+
+      // Force refresh after setting
+      noStore();
+      const updatedData = await kv.hgetall(id);
+      console.log("UPDATED DATA", updatedData);
+    } catch (e) {
+      console.log("error updating data", e);
     }
-
-    const fieldKey = `${votedFor}Votes`;
-    const currentVotes = currentVals[fieldKey];
-    const newVoteCount = currentVotes + 1;
-
-    await kv.hset(id, {
-      [fieldKey]: newVoteCount,
-    });
-
-    // Force refresh after setting
-    noStore();
-    const updatedData = await kv.hgetall(id);
-    console.log("UPDATED DATA", updatedData);
   };
 
   updateVals();
