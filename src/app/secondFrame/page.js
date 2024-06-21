@@ -11,7 +11,7 @@ const SecondFrame = (props) => {
   const vote = Number(props.searchParams.vote);
   const id = props.searchParams.id;
 
-  (async () => {
+  const updateVals = async () => {
     noStore();
     const currentVals = await kv.hgetall(id);
     const displayOrder = currentVals.displayOrder;
@@ -36,7 +36,9 @@ const SecondFrame = (props) => {
     noStore();
     const updatedData = await kv.hgetall(id);
     console.log("UPDATED DATA", updatedData);
-  })();
+  };
+
+  updateVals();
 
   const frameMetadata = getFrameMetadata({
     accepts: { xmtp: "2024-02-09" },
