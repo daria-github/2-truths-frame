@@ -7,48 +7,39 @@ export let metadata = {
   description: "Results",
 };
 
+const updateVals = async (id, vote) => {
+  try {
+    noStore();
+    const user = await kv.hgetall(id);
+    const displayOrder = user.displayOrder;
+    let votedFor;
+    if (vote === 1) {
+      votedFor = displayOrder[0];
+    } else if (vote === 2) {
+      votedFor = displayOrder[1];
+    } else if (vote === 3) {
+      votedFor = displayOrder[2];
+    }
+    const currentVals = await kv.hgetall(id);
+    const fieldKey = `${votedFor}Votes`;
+    const currentVotes = currentVals[fieldKey];
+    const newVoteCount = currentVotes + 1;
+
+    await kv.hset(id, {
+      [fieldKey]: newVoteCount,
+    });
+    // Force refresh after setting
+    const updatedData = await kv.hgetall(id);
+  } catch (e) {
+    console.log("error getting display order");
+  }
+};
+
 const SecondFrame = (props) => {
   const vote = Number(props.searchParams.vote);
   const id = props.searchParams.id;
 
-  console.log("ID IN SECOND FRAME", id);
-  const updateVals = async () => {
-    console.log("BEFORE DISPLAY ORDER");
-    const displayOrder = await kv.get(id, "displayOrder");
-    console.log("AFTER DISPLAY ORDER", displayOrder);
-
-    try {
-      noStore();
-      let votedFor;
-      if (vote === 1) {
-        votedFor = displayOrder[0];
-      } else if (vote === 2) {
-        votedFor = displayOrder[1];
-      } else if (vote === 3) {
-        votedFor = displayOrder[2];
-      }
-
-      console.log("VOTED FOR", votedFor);
-      const currentVals = await kv.hgetall(id);
-      console.log("CURRENT VALS", currentVals);
-      const fieldKey = `${votedFor}Votes`;
-      const currentVotes = currentVals[fieldKey];
-      const newVoteCount = currentVotes + 1;
-
-      await kv.hset(id, {
-        [fieldKey]: newVoteCount,
-      });
-
-      // Force refresh after setting
-      noStore();
-      const updatedData = await kv.hgetall(id);
-      console.log("UPDATED DATA", updatedData);
-    } catch (e) {
-      console.log("error updating data", e);
-    }
-  };
-
-  updateVals();
+  (async () => updateVals(id, vote))();
 
   const frameMetadata = getFrameMetadata({
     accepts: { xmtp: "2024-02-09" },
