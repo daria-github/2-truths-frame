@@ -1,9 +1,6 @@
 "use client";
-// import fs from "fs";
-// import path from "path";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { v4 } from "uuid";
 
 const Form = () => {
   const [currentTitle, setCurrentTitle] = useState("");
@@ -32,6 +29,7 @@ const Form = () => {
     try {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/saveData`, {
         method: "POST",
+        cache: "no-store",
         headers: {
           "Content-Type": "application/json",
         },

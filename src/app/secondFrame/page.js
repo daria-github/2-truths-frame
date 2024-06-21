@@ -1,6 +1,6 @@
 import { getFrameMetadata } from "@coinbase/onchainkit/frame";
-import fs from "fs";
-import path from "path";
+import { kv } from "@vercel/kv";
+import { unstable_noStore as noStore } from "next/cache";
 
 export let metadata = {
   title: "Two Truths and a Lie Frame",
@@ -11,25 +11,27 @@ const SecondFrame = (props) => {
   const vote = Number(props.searchParams.vote);
   const id = props.searchParams.id;
 
-  const votesFilePath = path.join(process.cwd(), "data", id, "votes.txt");
-  const orderFilePath = path.join(
-    process.cwd(),
-    "data",
-    id,
-    "displayOrder.txt"
-  );
-  const displayOrder = fs.readFileSync(orderFilePath, "utf-8");
+  (async () => {
+    noStore();
+    const currentVals = await kv.hgetall(id);
+    const displayOrder = currentVals.displayOrder;
+    let votedFor;
+    if (vote === 1) {
+      votedFor = displayOrder[0];
+    } else if (vote === 2) {
+      votedFor = displayOrder[1];
+    } else if (vote === 3) {
+      votedFor = displayOrder[2];
+    }
 
-  if (vote === 1) {
-    const votedFor = JSON.parse(displayOrder)[0];
-    fs.appendFileSync(votesFilePath, `${votedFor}\n`);
-  } else if (vote === 2) {
-    const votedFor = JSON.parse(displayOrder)[1];
-    fs.appendFileSync(votesFilePath, `${votedFor}\n`);
-  } else if (vote === 3) {
-    const votedFor = JSON.parse(displayOrder)[2];
-    fs.appendFileSync(votesFilePath, `${votedFor}\n`);
-  }
+    const fieldKey = `${votedFor}Votes`;
+    const currentVotes = parseInt(currentVals[fieldKey] || 0, 10);
+    const newVoteCount = currentVotes + 1;
+
+    await kv.hset(id, {
+      [fieldKey]: newVoteCount,
+    });
+  })();
 
   const frameMetadata = getFrameMetadata({
     accepts: { xmtp: "2024-02-09" },

@@ -1,52 +1,43 @@
 import { ImageResponse } from "next/og";
-import fs from "fs";
-import path from "path";
+import { kv } from "@vercel/kv";
+import { NextApiResponse } from "next";
+import { unstable_noStore as noStore } from "next/cache";
 
 // DARICK: This is the first frame image with the options
-export async function GET(request: Request) {
+export async function GET(request: Request, response: NextApiResponse) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id") || "";
 
-    const displayFilePath = path.join(
-      process.cwd(),
-      "data",
-      id,
-      "displayOrder.txt"
-    );
+    noStore();
+    const user = await kv.hgetall(id);
 
-    const displayFileItems = fs.readFileSync(displayFilePath, "utf8");
-    const parsedItems = JSON.parse(displayFileItems);
-
-    const truth1FilePath = path.join(process.cwd(), "data", id, "truth1.txt");
-    const truth2FilePath = path.join(process.cwd(), "data", id, "truth2.txt");
-    const nameFilePath = path.join(process.cwd(), "data", id, "name.txt");
-    const lieFilePath = path.join(process.cwd(), "data", id, "lie.txt");
+    const displayFileItems = (user?.displayOrder as Array<string>) || [];
 
     // Read the file contents
-    const truth1 = fs.readFileSync(truth1FilePath, "utf8");
-    const truth2 = fs.readFileSync(truth2FilePath, "utf8");
-    const name = fs.readFileSync(nameFilePath, "utf8");
-    const lie = fs.readFileSync(lieFilePath, "utf8");
+    const name = user?.name;
+    const truth1 = user?.truth1;
+    const truth2 = user?.truth2;
+    const lie = user?.lie;
 
     const firstItem =
-      parsedItems[0] === "truth1"
+      displayFileItems[0] === "truth1"
         ? truth1
-        : parsedItems[0] === "truth2"
+        : displayFileItems[0] === "truth2"
         ? truth2
         : lie;
 
     const secondItem =
-      parsedItems[1] === "truth1"
+      displayFileItems[1] === "truth1"
         ? truth1
-        : parsedItems[1] === "truth2"
+        : displayFileItems[1] === "truth2"
         ? truth2
         : lie;
 
     const thirdItem =
-      parsedItems[2] === "truth1"
+      displayFileItems[2] === "truth1"
         ? truth1
-        : parsedItems[2] === "truth2"
+        : displayFileItems[2] === "truth2"
         ? truth2
         : lie;
 
@@ -75,7 +66,7 @@ export async function GET(request: Request) {
               tw="text-3xl font-semibold text-white border-b-2 border-white font-playfair"
               key={index}
             >
-              {index + 1}: {item}
+              {index + 1}: {item as string}
             </h2>
           ))}
         </div>

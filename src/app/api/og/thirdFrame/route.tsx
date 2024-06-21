@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
-import path from "path";
-import fs from "fs";
+import { kv } from "@vercel/kv";
 
 // DARICK: This is the third frame image with the results
 export async function GET(request: Request) {
@@ -8,11 +7,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id") || "";
 
-    const nameFilePath = path.join(process.cwd(), "data", id, "name.txt");
-    const lieFilePath = path.join(process.cwd(), "data", id, "lie.txt");
-
-    const name = fs.readFileSync(nameFilePath, "utf8");
-    const lie = fs.readFileSync(lieFilePath, "utf8");
+    const name = await kv.hget(id, "name");
+    const lie = (await kv.hget(id, "lie")) as string;
 
     return new ImageResponse(
       (
