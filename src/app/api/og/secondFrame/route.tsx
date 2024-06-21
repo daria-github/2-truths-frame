@@ -10,6 +10,8 @@ export async function GET(request: Request) {
     noStore();
     const user = await kv.hgetall(id);
 
+    console.log("IN API ROUTE", user);
+
     const displayFileItems = (user?.displayOrder as Array<string>) || [];
 
     const truth1 = user?.truth1;

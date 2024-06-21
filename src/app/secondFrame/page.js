@@ -34,7 +34,8 @@ const SecondFrame = (props) => {
 
     // Force refresh after setting
     noStore();
-    await kv.hgetall(id);
+    const updatedData = await kv.hgetall(id);
+    console.log("UPDATED DATA", updatedData);
   })();
 
   const frameMetadata = getFrameMetadata({
