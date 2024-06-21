@@ -2,11 +2,37 @@ import { ImageResponse } from "next/og";
 import { kv } from "@vercel/kv";
 import { unstable_noStore as noStore } from "next/cache";
 
+const updateVals = async (id: string, vote: number) => {
+  try {
+    noStore();
+    const user = await kv.hgetall(id);
+    const displayOrder = user?.displayOrder as Array<string>;
+    let votedFor;
+    if (vote === 1) {
+      votedFor = displayOrder[0];
+    } else if (vote === 2) {
+      votedFor = displayOrder[1];
+    } else if (vote === 3) {
+      votedFor = displayOrder[2];
+    }
+    const fieldKey = `${votedFor}Votes`;
+    const currentVotes = user?.[fieldKey] as number;
+    const newVoteCount = currentVotes + 1;
+
+    await kv.hset(id, {
+      [fieldKey]: newVoteCount,
+    });
+  } catch (e) {}
+};
+
 // DARICK: This is the second frame image with the results
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id") || "";
+    const vote = searchParams.get("vote") || "";
+    await updateVals(id, Number(vote));
+
     noStore();
     const user = await kv.hgetall(id);
 

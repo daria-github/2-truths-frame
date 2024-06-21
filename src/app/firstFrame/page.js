@@ -1,6 +1,6 @@
 import { getFrameMetadata } from "@coinbase/onchainkit/frame";
 import CopyButton from "../components/CopyButton";
-
+import { useMemo } from "react";
 export let metadata = {
   title: "Two Truths and a Lie Frame",
   description: "Which is the lie?!",
@@ -8,28 +8,32 @@ export let metadata = {
 
 const FirstFrame = (props) => {
   const id = props.searchParams.id;
-  const frameMetadata = getFrameMetadata({
-    accepts: { xmtp: "2024-02-09" },
-    isOpenFrame: true,
-    buttons: [
-      {
-        label: "1",
-        action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=1&id=${id}`,
-      },
-      {
-        label: "2",
-        action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=2&id=${id}`,
-      },
-      {
-        label: "3",
-        action: "post",
-        target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=3&id=${id}`,
-      },
-    ],
-    image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/firstFrame?id=${id}`,
-  });
+  const frameMetadata = useMemo(
+    () =>
+      getFrameMetadata({
+        accepts: { xmtp: "2024-02-09" },
+        isOpenFrame: true,
+        buttons: [
+          {
+            label: "1",
+            action: "post",
+            target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=1&id=${id}`,
+          },
+          {
+            label: "2",
+            action: "post",
+            target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=2&id=${id}`,
+          },
+          {
+            label: "3",
+            action: "post",
+            target: `${process.env.NEXT_PUBLIC_BASE_URL}/secondFrame?vote=3&id=${id}`,
+          },
+        ],
+        image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/firstFrame?id=${id}`,
+      }),
+    [id]
+  );
 
   metadata = {
     ...metadata,
