@@ -28,10 +28,13 @@ const SecondFrame = (props) => {
     const currentVotes = currentVals[fieldKey];
     const newVoteCount = currentVotes + 1;
 
-    noStore();
     await kv.hset(id, {
       [fieldKey]: newVoteCount,
     });
+
+    // Force refresh after setting
+    noStore();
+    await kv.hgetall(id);
   })();
 
   const frameMetadata = getFrameMetadata({
