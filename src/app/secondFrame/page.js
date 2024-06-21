@@ -13,15 +13,12 @@ const SecondFrame = (props) => {
 
   console.log("ID IN SECOND FRAME", id);
   const updateVals = async () => {
-    console.log("gett in to update vals. should hit this after any vote");
+    console.log("BEFORE DISPLAY ORDER");
+    const displayOrder = await kv.get(id, "displayOrder");
+    console.log("AFTER DISPLAY ORDER", displayOrder);
+
     try {
-      console.log("before invalidating store");
       noStore();
-      console.log("after invalidating store");
-      const currentVals = await kv.hgetall(id);
-      console.log("CURRENT VALS!", currentVals);
-      const displayOrder = currentVals.displayOrder;
-      console.log("pre-display order", displayOrder);
       let votedFor;
       if (vote === 1) {
         votedFor = displayOrder[0];
@@ -31,7 +28,9 @@ const SecondFrame = (props) => {
         votedFor = displayOrder[2];
       }
 
-      console.log("voted for", votedFor);
+      console.log("VOTED FOR", votedFor);
+      const currentVals = await kv.hgetall(id);
+      console.log("CURRENT VALS", currentVals);
       const fieldKey = `${votedFor}Votes`;
       const currentVotes = currentVals[fieldKey];
       const newVoteCount = currentVotes + 1;
