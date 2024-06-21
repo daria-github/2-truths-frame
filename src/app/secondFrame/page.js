@@ -25,7 +25,7 @@ const SecondFrame = (props) => {
     }
 
     const fieldKey = `${votedFor}Votes`;
-    const currentVotes = parseInt(currentVals[fieldKey] || 0, 10);
+    const currentVotes = currentVals[fieldKey];
     const newVoteCount = currentVotes + 1;
 
     noStore();
